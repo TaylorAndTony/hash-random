@@ -10,6 +10,8 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="github.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"></script>
     <title>哈希随机抽取</title>
 </head>
 
@@ -42,7 +44,7 @@
 
 
         <h2>随机结果</h2>
-        
+
         <div class="input-group">
             <span class="input-group-text">抽取结果</span>
             <textarea class="form-control lucky" id="output" readonly></textarea>
@@ -55,7 +57,7 @@
             <span class="input-group-text">种子哈希</span>
             <input type="text" class="form-control lucky" placeholder="" id="salt-hash" readonly>
         </div>
-        <p>为保持页面性能，仅显示最多 50 位人员的哈希校验</p>
+        <p>为保持页面性能，仅显示前面最多 1000 位人员的哈希校验</p>
         <div id="table">
             <table class="table table-striped table-hover">
                 <thead>
@@ -70,8 +72,45 @@
                 </tbody>
             </table>
         </div>
+
+        <h2>核心算法</h2>
+        <p>md5 哈希计算依赖 js-md5 库。</p>
+        <pre><code class="language-html">
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js&quot;&gt;&lt;/script&gt;
+        </code></pre>
+
+        <p>哈希距离计算算法</p>
+        <pre><code class="language-js">
+function calcMd5Distance(s1, s2) {
+    let distance = 0;
+    for (let i = 0; i &lt; Math.min(s1.length, s2.length); i++) {
+        if (s1[i] === s2[i]) {
+            continue;
+        }
+        distance += Math.abs(s1.charCodeAt(i) - s2.charCodeAt(i));
+    }
+    return distance;
+}
+        </code></pre>
+
+        <p>哈希距离排序算法</p>
+        <pre><code class="language-js">
+function makeSortedNameHashDistanceTuple(targetHash, names) {
+    let nameHashDistanceTuple = names.map((name) => {
+        let nameMd5 = makeMd5(name);
+        let distance = calcMd5Distance(targetHash, nameMd5);
+        return [name, nameMd5, distance];
+    });
+    // sort by distance
+    nameHashDistanceTuple.sort((a, b) => {
+        return a[2] - b[2];
+    });
+    return nameHashDistanceTuple;
+}
+        </code></pre>
     </div>
     <script src="main.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 
 </html>

@@ -49,7 +49,7 @@ $(document).ready(function () {
         // console.log('names:', names);
         let nameHashDistanceTuple = makeSortedNameHashDistanceTuple(saltHash, names);
         console.log('name hash distance tuple:', nameHashDistanceTuple);
-        updateTupleToTable(nameHashDistanceTuple, 50);
+        updateTupleToTable(nameHashDistanceTuple, 1000);
         let count = parseInt($("#count").val());
         if (count == NaN) {
             return;

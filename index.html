@@ -7,10 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
+    <!-- jquery -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- md5  -->
     <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    <!-- sweetalert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="github.min.css">
+    <!-- highlight -->
+    <link rel="stylesheet" href="lib/github.min.css">
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"></script>
     <title>哈希随机抽取</title>
 </head>
@@ -19,11 +23,15 @@
     <div id="app">
         <h1>依赖随机字符的哈希算法随机抽取</h1>
         <div id="feature">
-            <span>事前不可知</span>
-            <span>事后可复现</span>
+            <span class="tag">事前不可知</span>
+            <span class="tag">事后可复现</span>
+            <span class="tag">高度随机化</span>
         </div>
 
         <h2>随机种子</h2>
+        <p>选择一个随机的文本作为种子值。这个种子值将被用作计算哈希值的输入。</p>
+        <p>选择种子值是一个非常重要的步骤，因为它将直接影响到最终的排序结果。为了获得最好的排序效果，建议选择事先无法确定的内容作为种子。</p>
+        <p>如明天的热搜第一条，或某一个群聊内最新的一条消息，满足「事前不可知」。</p>
         <!-- random seed -->
         <div class="input-group mb-3">
             <span class="input-group-text">填写事先无法预测的文本</span>
@@ -45,6 +53,8 @@
 
         <h2>随机结果</h2>
 
+        <p>此网页将逐一比较每个参与者的哈希值与种子的哈希值。通过计算它们之间的相似度，可以找出与种子值最接近的参与者，并将他们按照相似度的程度进行排序。</p>
+        <p>这种排序方法可以确保在每次排序过程中都能产生一致而可靠的结果，满足了「事后可复现」</p>
         <div class="input-group">
             <span class="input-group-text">抽取结果</span>
             <textarea class="form-control lucky" id="output" readonly></textarea>

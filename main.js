@@ -45,7 +45,7 @@ $(document).ready(function () {
         $('#salt-hash').val(saltHash);
         // console.log('salt hash:', saltHash);
         // use regex [\n ] to split #people
-        let names = $("#people").val().split(/[\n ,|，。]/);
+        let names = $("#people").val().split(/[\n\t ,|，。]+/);
         // console.log('names:', names);
         let nameHashDistanceTuple = makeSortedNameHashDistanceTuple(saltHash, names);
         console.log('name hash distance tuple:', nameHashDistanceTuple);

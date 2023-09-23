@@ -5,6 +5,7 @@ body {
 
 h1 {
     padding: 20px 0;
+    text-align: center;
 }
 
 h2 {
@@ -18,6 +19,18 @@ h2 {
     max-width: 800px;
     margin: 0 auto;
     /* text-align: center; */
+}
+
+#feature {
+    text-align: center;
+}
+
+span.tag {
+    color: crimson;
+    border: 1px solid crimson;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: 0 10px;
 }
 
 .gap {
